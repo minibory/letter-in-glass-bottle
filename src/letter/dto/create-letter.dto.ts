@@ -2,14 +2,16 @@ import {
     IsNotEmpty,
     IsString,
     IsNumber,
-    MaxLength,
-    MinLength,
 } from "class-validator";
+import {Sender} from "../../schemas/sender.schema";
+import {Recipient} from "../../schemas/recipient.schema";
 
 export class CreateLetterDto {
-    @IsNumber()
     @IsNotEmpty()
-    id: number;
+    sender: Sender;
+
+    @IsNotEmpty()
+    recipient: Recipient;
 
     @IsString()
     @IsNotEmpty()
@@ -18,4 +20,12 @@ export class CreateLetterDto {
     @IsNumber()
     @IsNotEmpty()
     views: number;
+
+    @IsNumber()
+    @IsNotEmpty()
+    upvote: number;
+
+    @IsNumber()
+    @IsNotEmpty()
+    downvote: number;
 }

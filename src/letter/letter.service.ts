@@ -7,13 +7,11 @@ import {UpdateLetterDto} from "./dto/update-letter.dto";
 
 @Injectable()
 export class LetterService {
-    constructor(
-        @InjectModel(Letter.name) private readonly letterModel: Model<LetterDocument>,
-    ) {}
+    constructor(@InjectModel(Letter.name) private readonly letterModel: Model<LetterDocument>) {}
 
     async create(createLetterDto: CreateLetterDto): Promise<LetterDocument> {
         const letter = new this.letterModel(createLetterDto);
-        return letter.save();
+        return await letter.save();
     }
 
     async findAll(): Promise<LetterDocument[]> {
