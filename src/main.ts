@@ -3,9 +3,14 @@ import {AppModule} from './app.module';
 import {ValidationPipe} from "@nestjs/common";
 import {ConfigService} from "@nestjs/config";
 import {DocumentBuilder, SwaggerModule} from "@nestjs/swagger";
+import * as express from 'express';
+import { join } from 'path';
+
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  app.use(express.static(join(__dirname, '..', 'views')));
+  app.use('/public', express.static(join(__dirname, '..', 'public')));
   app.useGlobalPipes(new ValidationPipe({ whitelist: true }));
   const configService = app.get(ConfigService);
 
